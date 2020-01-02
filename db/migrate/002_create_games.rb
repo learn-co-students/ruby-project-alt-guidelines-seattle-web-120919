@@ -3,6 +3,7 @@ class CreateGames < ActiveRecord::Migration[5.2]
         create_table :games do |t|
             t.belongs_to :user
             t.belongs_to :word
+            t.string :word
             t.timestamps
         end
     end

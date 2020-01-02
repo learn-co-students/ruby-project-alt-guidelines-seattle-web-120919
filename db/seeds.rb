@@ -10,6 +10,8 @@ hint_array = ["dish", "fruits", "ingredient", "spice", "sushi", "vegetables"]
 end
 
 Game.create(user_id: User.all.sample.id, word_id: Word.all.sample.id)
+
+
 puts"seeds done"
 
 # categories = 
