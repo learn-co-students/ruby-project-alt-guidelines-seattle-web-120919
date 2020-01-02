@@ -36,11 +36,10 @@ ActiveRecord::Schema.define(version: 4) do
 
   create_table "words", force: :cascade do |t|
     t.integer "game_id"
-    t.integer "category_id"
     t.string "given_word"
+    t.string "synonyms"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_words_on_category_id"
     t.index ["game_id"], name: "index_words_on_game_id"
   end
 
