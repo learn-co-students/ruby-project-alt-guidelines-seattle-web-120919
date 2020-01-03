@@ -3,7 +3,7 @@ require_relative '../config/environment'
 class CommandLineInterface
 
     def greet
-        puts ""
+        system "clear\n\n"
         puts " _   _   _   ______  _        ______  ______   _________   ______ "
         puts "| | | | | | | |     | |      | |     / |  | \\ | | | | | \\ | |   "
         puts "| | | | | | | |---- | |   _  | |     | |  | | | | | | | | | |---- "
@@ -13,10 +13,10 @@ class CommandLineInterface
         @user = User.create(name: @username)
         @user_id = @user.id
         main_menu
-        end
+    end
 
     def main_menu
-        puts " "
+        system "clear\n\n"
         puts "_______  ______   ______ _____ _______ "
         puts "  | |   | |  | | | |      | |    | |   "
         puts "  | |   | |__| | | |      | |    | |   "
@@ -71,11 +71,12 @@ class CommandLineInterface
     def enter_word(food)
         
         5.times do 
-            word_entered = gets.chomp
-            if word_entered != food
-                puts "Try Again.\n\n"
+            word_entered = gets.chomp.downcase
+            if word_entered != food.downcase
+                puts "Please try again.\n\n"
             else
-                puts "\n\nYou guessed correctly!\n\n"
+                system "clear"
+                puts "\n\nYay! You guessed correctly!\n\n"
 
     puts "                                        .''.                  "
     puts "            .''.      .        *''*    :_\\/_:     .           "
@@ -108,9 +109,10 @@ class CommandLineInterface
             end
         end
 
+        system "clear"
         puts "Sorry, better luck next time! \n\n"
         puts " ¯\\(°_o)/¯ "
-        puts "\nEnter any key to return to the main menu.\n"
+        puts "\n\nEnter any key to return to the main menu.\n"
         option = gets.chomp
         case option
         when "1"
@@ -124,10 +126,12 @@ class CommandLineInterface
         # puts "Time is Up!"
         # system(%Q{say -v "Vick" "Your tomato has exploded. Time is up."})
         # get_score
+        
     end
 
     def update_profile
-        puts "\n\n ______   ______   ______   ______ _____  _        ______ "
+        system "clear\n\n"
+        puts " ______   ______   ______   ______ _____  _        ______ "
         puts "| |  | \\ | |  | \\ / |  | \\ | |      | |  | |      | |     "
         puts "| |__|_/ | |__| | | |  | | | |----  | |  | |   _  | |---- "
         puts "|_|      |_|  \\_\\ \\_|__|_/ |_|     _|_|_ |_|__|_| |_|____ \n\n"
@@ -155,6 +159,7 @@ class CommandLineInterface
         when "2"
             main_menu
         end
+        system "clear"
         main_menu
     end
 
@@ -166,15 +171,31 @@ class CommandLineInterface
     # end
 
     def delete_user
-        @user.destroy
-        
-        puts "\nYour account has been deleted. Thanks for playing!\n"
-        puts "\nEnter any key to return to the main menu.\n"
-        key = gets.chomp
-        case key
-        when "1"
+        system "clear\n\n"
+        puts "Are you sure you want to delete your account?  Y / N ?"
+        option = gets.chomp
+        case option
+        when "N".downcase
             main_menu
-        end
+        when "Y".downcase
+            @user.destroy
+        
+    puts "                           .___ ___.                     "
+    puts "    ____   ____   ____   __| _/ \\_ |__ ___.__. ____      "
+    puts "   / ___\\ /  _ \\ /  _ \\ / __ |   | __ <   |  |/ __ \\     "
+    puts "  / /_/  >  <_> |  <_> ) /_/ |   | \\_\\ \\___  \\  ___/     "
+    puts "  \\___  / \\____/ \\____/\\____ |   |___  / ____|\\___  > /\\ "
+    puts " /_____/                    \\/       \\/\\/         \\/  \\/ "
+
+            puts "\nYour account has been deleted. Thanks for playing!\n\n"
+            puts "\nEnter any key to exit the game.\n"
+            key = gets.chomp
+            case key
+            when "1"
+                exit! 
+            end
+            exit! 
+        end 
         main_menu
     end
 end
