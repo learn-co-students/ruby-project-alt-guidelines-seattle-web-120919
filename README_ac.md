@@ -9,11 +9,16 @@ _______  ______   ______ _____ _______
 
 ============================================================================
 
+Getting Started: 
+
+- Install the application database by running "rake db:seed" 
+- Run the application in your terminal with "ruby bin/run.rb"
+
 Rules:
 
 1. A player enters their chosen username to begin. 
 2. Each game will provide a category for the word or phrase to be guessed.
-3. A player has up to 5 chances to guess correctly or the game ends.
+3. A player has up to 5 chances to guess correctly or the game is over.
 
 ============================================================================
 

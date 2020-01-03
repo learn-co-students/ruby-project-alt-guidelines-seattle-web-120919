@@ -13,7 +13,7 @@ class CommandLineInterface
         @user = User.create(name: @username)
         @user_id = @user.id
         main_menu
-    end
+        end
 
     def main_menu
         puts " "
