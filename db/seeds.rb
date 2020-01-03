@@ -6,7 +6,7 @@ hint_array = ["dish", "fruits", "ingredient", "spice", "sushi", "vegetables"]
 20.times do
     index = rand(0..5)
     word = hint_array[index]
-    puts Word.create(word: Faker::Food.send(word), hint: hint_array[index]).word
+    Word.create(word: Faker::Food.send(word), hint: hint_array[index]).word
 end
 
 Game.create(user_id: User.all.sample.id, word_id: Word.all.sample.id)
