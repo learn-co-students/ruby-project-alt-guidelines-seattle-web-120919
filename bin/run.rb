@@ -48,7 +48,7 @@ class CommandLineInterface
         game = Game.create(user_id: @user_id, word_id: Word.all.sample.id)
         food = game.word.word
         puts "\nThe category is: #{game.word.category}\n"
-        puts food ### for testing sake! ###
+        #puts food ### for testing sake! ###
 
         secret_word = food.split("")
         secret_word_array = []
