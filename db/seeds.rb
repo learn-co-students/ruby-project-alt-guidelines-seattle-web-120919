@@ -1,18 +1,17 @@
 require "faker"
-User.create(name: Faker::Name.name, score:0)
+User.create(name: Faker::Name.name)
 
-hint_array = ["dish", "fruits", "ingredient", "spice", "sushi", "vegetables"]
+category_array = ["dish", "fruits", "ingredient", "spice", "sushi", "vegetables"]
 
 20.times do
     index = rand(0..5)
-    word = hint_array[index]
-    Word.create(word: Faker::Food.send(word), hint: hint_array[index]).word
+    word = category_array[index]
+    Word.create(word: Faker::Food.send(word), category: category_array[index]).word
 end
 
 Game.create(user_id: User.all.sample.id, word_id: Word.all.sample.id)
 
-
-puts"seeds done"
+puts "seeds done"
 
 # categories = 
 # Faker::Food.dish #=> "Caesar Salad"

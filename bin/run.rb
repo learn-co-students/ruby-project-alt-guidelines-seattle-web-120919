@@ -2,25 +2,38 @@ require_relative '../config/environment'
 
 class CommandLineInterface
 
+    def greet
+        puts ""
+        puts " _   _   _   ______  _        ______  ______   _________   ______ "
+        puts "| | | | | | | |     | |      | |     / |  | \\ | | | | | \\ | |   "
+        puts "| | | | | | | |---- | |   _  | |     | |  | | | | | | | | | |---- "
+        puts "|_|_|_|_|_/ |_|____ |_|__|_| |_|____ \\_|__|_/ |_| |_| |_| |_|____ .\n\n"
+        puts "\nPlease enter your name:\n\n" 
+        @username = gets.chomp
+        @user = User.create(name: @username)
+        @user_id = @user.id
+        main_menu
+    end
+
     def main_menu
-        puts "Please select an option:"
+        puts " "
+        puts "_______  ______   ______ _____ _______ "
+        puts "  | |   | |  | | | |      | |    | |   "
+        puts "  | |   | |__| | | |      | |    | |   "
+        puts "  |_|   |_|  |_| |_|____ _|_|_   |_|   \n\n"                              
+        puts "~|~|_  _    _  _  _ _  _    _  |`   _ ||    _.   _    |`    _ |  "
+        puts " | | |(/_  (_|(_|| | |(/_  (_)~|~  (_||||_|_\\|\\/(/_  ~|~|_|| |. "
+        puts "            _|                                                   "
+        puts "\nPlease select an option:\n\n" 
         puts "1 - Play a game"
         puts "2 - Update your profile"
         puts "3 - Delete your account"
-        puts "4 - Exit the game"
-        gets.chomp
-    end
+        puts "4 - Exit the game\n\n"
 
-    def greet
-        puts "Welcome!!! Play TACIT. The game of allusive fun! /n Enter your name below to play:" 
-        @user_name = gets.chomp
-        @user = User.create(name: @user_name, score:0) #revisit score
-        @user_id = @user.id
-        main_menu
         option = gets.chomp
         case option
         when "1"
-            play_game #(game)
+            play_game
         when "2"
             update_profile
         when "3"
@@ -30,13 +43,14 @@ class CommandLineInterface
         end
     end
 
-    def play_game #(game)
-        game = Game.create(user_id: @user_id, word_id: Word.all.sample.id)
-        w = game.word.word
-        puts "Your hint is: #{game.word.hint}"
-        puts w
+    def play_game
 
-        secret_word = game.word.word.split("")
+        game = Game.create(user_id: @user_id, word_id: Word.all.sample.id)
+        food = game.word.word
+        puts "\nThe category is: #{game.word.category}\n"
+        puts food ### for testing sake! ###
+
+        secret_word = food.split("")
         secret_word_array = []
         secret_word.each do |letter|
             if letter != " "
@@ -45,30 +59,64 @@ class CommandLineInterface
                 secret_word_array << "  "
             end
         end
-
-        puts " "
+        puts "\n"
         secret_word_array.each do |letter|
-            print letter 
+            print letter
         end 
-        puts " "
-        puts " "
-        puts "You have 5 total attempts to guess the secret word."
-        enter_word(w)
+
+        puts "\n\nYou have a total of 5 attempts to guess the word.\n\n"
+        enter_word(food)
     end
     
-    def enter_word(w)
+    def enter_word(food)
         
         5.times do 
             word_entered = gets.chomp
-            if word_entered != w
-                puts "Try Again."
+            if word_entered != food
+                puts "Try Again.\n\n"
             else
-                puts "You guessed correctly! Good Job!"
-                self.main_menu
+                puts "\n\nYou guessed correctly!\n\n"
+
+    puts "                                        .''.                  "
+    puts "            .''.      .        *''*    :_\\/_:     .           "
+    puts "           :_\\/_:   _\\(/_  .:.*_\\/_*   : /\\ :  .'.:.'.        "
+    puts "       .''.: /\\ :    /)\\   ':'* /\\ *  : '..'.  -=:o:=-        "
+    puts "      :_\\/_:'.:::.  | ' *''*    * '.\\'/.'_\\(/_ '.':'.'        "
+    puts "      : /\\ : :::::  =  *_\\/_*     -= o =- /)\\     '  *        "
+    puts "       '..'  ':::' === * /\\ *     .'/.\\'.  ' ._____           "
+    puts "           *        |   *..*         :        |.   |' .---'|   "
+    puts "             *      |     _            .--'|  ||   | _|    |   "
+    puts "             *      |  .-'|        __  |   |  |    ||      |   "
+    puts "          .-----.  / \\  |' |  ||  |  | |   |  |    ||      |   "
+    puts "      ___'       '/'''\\ |  '-.''.    '-'   '-.'    '`      |____"
+    puts "       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+    puts "                           ~-~-~-~-~-~-~-~-~-~    /|          "
+    puts "               )      ~-~-~-~-~-~-~-~  /|~       /_|\\        "
+    puts "             _-H-__  -~-~-~-~-~-~     /_|\\    -~======-~     "
+    puts "     ~-\\XXXXXXXXXX/~     ~-~-~-~     /__|_\\ ~-~-~-~         "
+    puts "     ~-~-~-~-~-~    ~-~~-~-~-~-~    ========  ~-~-~-~         "
+    puts "           ~-~~-~-~-~-~-~-~-~-~-~-~-~ ~-~~-~-~-~-~            "
+    puts "                             ~-~~-~-~-~-~                  \n\n"
+
+                puts "\nEnter any key to return to the main menu.\n"
+                key = gets.chomp
+                case key
+                when "1"
+                    main_menu
+                end
+                main_menu
             end
         end
 
-        # play_game(game)
+        puts "Sorry, better luck next time! \n\n"
+        puts " ¯\\(°_o)/¯ "
+        puts "\nEnter any key to return to the main menu.\n"
+        option = gets.chomp
+        case option
+        when "1"
+            main_menu
+        end       
+        main_menu
         # start_time = Time.now
         # end_time = start_time + 30
         # while Time.now < end_time
@@ -79,18 +127,32 @@ class CommandLineInterface
     end
 
     def update_profile
-        puts "User id: #{@user_id}"
-        puts "Username: #{@user_name}"
-        puts "Enter 1 to change username "
-        puts "Enter 2 to return to the Main Menu"
-        new_name = gets.chomp
+        puts "\n\n ______   ______   ______   ______ _____  _        ______ "
+        puts "| |  | \\ | |  | \\ / |  | \\ | |      | |  | |      | |     "
+        puts "| |__|_/ | |__| | | |  | | | |----  | |  | |   _  | |---- "
+        puts "|_|      |_|  \\_\\ \\_|__|_/ |_|     _|_|_ |_|__|_| |_|____ \n\n"
+        puts "User ID: #{@user.id}"
+        puts "Username: #{@user.name}"
+        puts "\nEnter 1 to change username."
+        puts "Enter 2 to return to the main menu."
+        profile_option = gets.chomp
         
-        if new_name == "1"
-            user = User.find_by(name: @user_name)
-            user.update(name: new_name)
-            new_username = User.find_by(name: new_name)
-            puts "Your username is now #{new_username}."
-        else 
+        case profile_option
+        when "1"
+            puts "\nEnter new username:\n"
+            new_name = gets.chomp
+            find_user = User.find_by(name: @user.name) # find user by name, set to variable
+            find_user.update(name: new_name) # update to new name
+
+            @user = User.find_by(name: new_name) # find user by new name
+            puts "\nYour username has been updated. Welcome #{@user.name}!\n"
+            puts "\nEnter any key to return to the main menu.\n"
+            key = gets.chomp
+                case key
+                when "1"
+                    main_menu
+                end
+        when "2"
             main_menu
         end
         main_menu
@@ -105,8 +167,16 @@ class CommandLineInterface
 
     def delete_user
         @user.destroy
+        
+        puts "\nYour account has been deleted. Thanks for playing!\n"
+        puts "\nEnter any key to return to the main menu.\n"
+        key = gets.chomp
+        case key
+        when "1"
+            main_menu
+        end
+        main_menu
     end
-
 end
 cli = CommandLineInterface.new
 cli.greet
