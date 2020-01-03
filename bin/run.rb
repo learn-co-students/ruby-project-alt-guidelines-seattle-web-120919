@@ -175,9 +175,9 @@ class CommandLineInterface
         puts "Are you sure you want to delete your account?  Y / N ?"
         option = gets.chomp
         case option
-        when "N".downcase
+        when "N"
             main_menu
-        when "Y".downcase
+        when "Y"
             @user.destroy
         
     puts "                           .___ ___.                     "
